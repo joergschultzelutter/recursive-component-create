@@ -1,0 +1,77 @@
+[{
+        "task": "create server 1",
+        "action": "Managed OS Create",
+        "body": {
+            "Feld1": "Wert1",
+            "Feld2": "Wert2",
+            "Feld3": "Wert3"
+        },
+        "uuid": "c3f3ceac-c5b4-11ec-a215-d7a325ffeeba",
+        "egress": {
+            "server-id": "c3f3ceac-c5b4-11ec-a215-d7a325ffeeba-server-id"
+        },
+        "dependencies": [{
+                "task": "create_webserver 1",
+                "action": "Managed Webservice Create",
+                "uuid": "dd75a620-c5b4-11ec-9ef1-ffcd2c67688b",
+                "ingress": {
+                    "c3f3ceac-c5b4-11ec-a215-d7a325ffeeba-server-id": "server-id"
+                },
+                "body": {
+                    "Feld1": "Wert3",
+                    "Feld2": "Wert3",
+                    "Feld3": "Wert3"
+                }
+            },
+            {
+                "task": "create_database 1",
+                "action": "Managed Database Create",
+                "body": {},
+                "ingress": {
+                    "c3f3ceac-c5b4-11ec-a215-d7a325ffeeba-server-id": "server-id"
+                },
+                "uuid": "eeca6578-c5b4-11ec-a9bd-b73b9e2c3608",
+                "dependencies": [{
+                    "task": "create_table 1",
+                    "action": "Managed Database Create Table",
+                    "body": {},
+                    "uuid": "fd72c980-c5b4-11ec-a9a3-f3d0901af9e8"
+                }]
+
+            }
+
+        ]
+    },
+    {
+        "task": "create_server 2",
+        "action": "Managed OS Create",
+        "body": {},
+        "uuid": "59c4b126-c5b5-11ec-a049-976458859358",
+        "dependencies": [{
+                "task": "create_monitor 2",
+                "action": "Managed Monitor Create",
+                "body": {},
+                "uuid": "0c88fbc4-c5b5-11ec-9a1b-87c8455be7a2"
+            },
+            {
+                "task": "create_webserver 2",
+                "action": "Managed Webservice Create",
+                "body": {},
+                "uuid": "4a65b2b6-c5b5-11ec-8b18-5f1782b09290",
+                "dependencies": [{
+                    "task": "create_content 2",
+                    "action": "Managed Webservice Create Content",
+                    "body": {},
+                    "uuid": "196ada88-c5b5-11ec-a1a1-e3b24b80fd58"
+                }, {
+                    "task": "create_images 2",
+                    "action": "Managed Webservice Create Images",
+                    "body": {},
+                    "uuid": "2fea1594-c5b5-11ec-89a8-57ae1b92f8cf"
+                }]
+
+            }
+
+        ]
+    }
+]
